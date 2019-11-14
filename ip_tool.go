@@ -14,6 +14,10 @@ func IsInnerNet(ip string) (bool, error) {
 		return false, errors.New("parameter is not ip")
 	}
 
+	if ip == "127.0.0.1" {
+		return true, nil
+	}
+
 	sections := strings.Split(ip, ".")
 	switch sections[0] {
 	case "10":
