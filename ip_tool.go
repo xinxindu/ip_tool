@@ -2,6 +2,7 @@ package ip_tool
 
 import (
 	"errors"
+	"net"
 	"strconv"
 	"strings"
 )
@@ -41,21 +42,6 @@ func IsInnerNet(ip string) (bool, error) {
 /*
 	判断是否是IP
 */
-func IsIp(ip string) bool {
-	sections := strings.Split(ip, ".")
-	if len(sections) != 4 {
-		return false
-	}
-
-	for _, section := range sections {
-		num, err := strconv.Atoi(section)
-		if err != nil {
-			return false
-		}
-
-		if num<0 || num >255 {
-			return false
-		}
-	}
-	return true
+func IsIp(ipStr string) bool {
+	return net.ParseIP(ipStr) != nil
 }
